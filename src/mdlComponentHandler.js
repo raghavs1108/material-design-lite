@@ -227,15 +227,8 @@ componentHandler = (function() {
           'Unable to find a registered component for the given class.');
       }
 
-      var ev;
-      if ('CustomEvent' in window && typeof window.CustomEvent === 'function') {
-        ev = new Event('mdl-componentupgraded', {
-          bubbles: true, cancelable: false
-        });
-      } else {
-        ev = document.createEvent('Events');
-        ev.initEvent('mdl-componentupgraded', true, true);
-      }
+      var ev = document.createEvent('CustomEvent');
+      ev.initEvent('mdl-componentupgraded', true, true);
       element.dispatchEvent(ev);
     }
   }
@@ -358,15 +351,8 @@ componentHandler = (function() {
       upgrades.splice(componentPlace, 1);
       component.element_.setAttribute('data-upgraded', upgrades.join(','));
 
-      var ev;
-      if ('CustomEvent' in window && typeof window.CustomEvent === 'function') {
-        ev = new Event('mdl-componentdowngraded', {
-          bubbles: true, cancelable: false
-        });
-      } else {
-        ev = document.createEvent('Events');
-        ev.initEvent('mdl-componentdowngraded', true, true);
-      }
+      var ev = document.createEvent('CustomEvent');
+      ev.initEvent('mdl-componentdowngraded', true, true);
       component.element_.dispatchEvent(ev);
     }
   }
